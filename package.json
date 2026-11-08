@@ -1,0 +1,24 @@
+{
+  "name": "@omniplay/node",
+  "version": "0.1.0",
+  "description": "omnisense/omniplay inside a Node.js game server: verify the tickets players present (base64url(json) \".\" hex(hmac_sha256)), mint them, and send the server's heartbeats to the application. No dependency: node:crypto and fetch.",
+  "type": "module",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.js"
+    }
+  },
+  "files": ["src"],
+  "engines": { "node": ">=18" },
+  "scripts": { "test": "node --test" },
+  "keywords": ["omniplay", "game-server", "ticket", "hmac", "heartbeat", "multiplayer"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/glitchr-omnisense/omniplay-node.git"
+  },
+  "author": "Marco Meyer <marco.meyer@glitchr.io>",
+  "license": "MIT"
+}
