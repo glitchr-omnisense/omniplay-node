@@ -1,0 +1,38 @@
+# The package's CI: its tests on the Node versions package.json's engines accept, and the tarball npm
+# would publish (npm pack --dry-run: only src/, the README, the changelog, the licence, package.json).
+name: ci
+
+on:
+  push:
+    branches: ['1.x']
+  pull_request:
+  workflow_dispatch:
+  # release.yml runs this CI on a tag before the release.
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: node ${{ matrix.node }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['20', '22', '24']
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: ${{ matrix.node }}
+      - run: node --test
+      - name: The tarball holds what it should, nothing else
+        run: |
+          set -eu
+          npm pack --dry-run --json > pack.json
+          jq -r '.[0].files[].path' pack.json | sort > files.txt
+          cat files.txt
+          unexpected=$(grep -Ev '^(src/[^/]+\.(js|d\.ts)|README\.md|CHANGELOG\.md|LICENSE|package\.json)$' files.txt || true)
+          if [ -n "$unexpected" ]; then echo "::error::Unexpected files in the tarball: $unexpected"; exit 1; fi
