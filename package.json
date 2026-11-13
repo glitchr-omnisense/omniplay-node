@@ -20,5 +20,6 @@
     "url": "git+https://github.com/glitchr-omnisense/omniplay-node.git"
   },
   "author": "Marco Meyer <marco.meyer@glitchr.io>",
-  "license": "MIT"
+  "license": "MIT",
+  "publishConfig": { "access": "public" }
 }

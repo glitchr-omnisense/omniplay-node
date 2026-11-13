@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased
+## [Unreleased]
+
+## [0.1.0] - 2026-11-13
 
 ### Added
 - `@omniplay/node`: `verify`, `sign`, `signJson`, `mint`, `encodeJson` (JSON as PHP's

@@ -5,6 +5,10 @@
 server's heartbeats to the application. No dependency: `node:crypto` and `fetch` (Node 18 or
 later). It calls omniplay; omniplay never calls it.
 
+```sh
+npm install @omniplay/node
+```
+
 ```js
 import { verify, fromEnv, startHeartbeat } from '@omniplay/node';
 
